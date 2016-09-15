@@ -1,0 +1,52 @@
+######################################################
+######################################################
+## These constraints are for MARK-1 RPI/FPGA shield ##
+######################################################
+######################################################
+#logi-bone r1.5 check 150315 mj
+######################
+# Timing Constraints #
+######################
+
+##### Grouping Constraints #####
+NET "OSC_FPGA" TNM_NET = clk50_grp;
+#NET "GPMC_CLK" TNM_NET = clk100_grp;
+##### Clock Period Constraints #####
+TIMESPEC TS_PER_CLK50 = PERIOD "clk50_grp" 20.0 ns;
+#TIMESPEC TS_PER_CLK100 = PERIOD "clk100_grp" 20.0 ns;
+
+#INST "gpmc2wishbone" LOC = SLICE_X1Y3;
+
+#PIN "pll0/clkout4_buf.O" CLOCK_DEDICATED_ROUTE = FALSE;
+#PIN "pll0/clkout5_buf.O" CLOCK_DEDICATED_ROUTE = FALSE;
+#######################
+# Pin LOC Constraints #
+#######################
+
+#OSCILLATOR
+NET "OSC_FPGA"		LOC = "P85";
+
+
+# ARDUINO SOCKET
+NET "PRU_READY"     LOC = "P84" | IOSTANDARD = LVTTL;                           # ard 0
+
+# PMOD1
+NET "ADC_CS"        LOC = "P112" | IOSTANDARD = LVTTL ;              # pmod1 1
+NET "ADC1_SDO" 	    LOC = "P111" | IOSTANDARD = LVTTL;                          # pmod1 2
+NET "ADC_CLK" LOC = "P67" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 12; # pmod1 3
+NET "ADC2_SDO"	    LOC = "P66" | IOSTANDARD = LVTTL;                           # pmod1 4
+
+NET "PRU_DATA<10>"	LOC = "P62"  | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE=2;# pmod1 7
+NET "PRU_DATA<8>"	LOC = "P61" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE=2; # pmod1 8
+NET "PRU_DATA<9>"	LOC = "P58" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE=2; # pmod1 9
+NET "PRU_DATA<11>"	LOC = "P57" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE=2; # pmod1 10
+#
+# PMOD2
+NET "PRU_DATA<0>"	LOC = "P56" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE=2; # pmod2 1
+NET "PRU_DATA<2>"	LOC = "P55" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE=2; # pmod2 2
+NET "PRU_DATA<4>"	LOC = "P46" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE=2; # pmod2 3
+NET "PRU_DATA<6>"	LOC = "P45" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE=2; # pmod2 4
+NET "PRU_DATA<1>"	LOC = "P48" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE=2; # pmod2 7
+NET "PRU_DATA<3>"	LOC = "P47" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE=2; # pmod2 8
+NET "PRU_DATA<5>"	LOC = "P44" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE=2; # pmod2 9
+NET "PRU_DATA<7>"	LOC = "P43" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE=2; # pmod2 10
